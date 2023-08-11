@@ -1,0 +1,11 @@
+module Pwr2chk(
+              input logic [NUM_INPUT-1:0] in,
+              output logic [NUM_INPUT-1:0] power2,
+              output match);
+
+always_comb()
+  begin 
+        match = (in && (in & (in-1))==0) ? 1:0;
+        power2 = match ? $clog(in & ~(in-1)):0;
+        
+end 
