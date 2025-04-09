@@ -1,4 +1,4 @@
-  module #(parameter WIDTH=4, SHIFT=0) Shift_LR_Rotate(
+module #(parameter WIDTH=4, SHIFT=0) Circular_LR_Rotate(
 
                   input logic [WIDTH-1:0] shift_in,
                   output logic [WIDTH-1:0] Shift_out,
