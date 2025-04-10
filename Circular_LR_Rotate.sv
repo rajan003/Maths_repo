@@ -7,7 +7,7 @@ module #(parameter WIDTH=4, SHIFT=0) Circular_LR_Rotate(
                   input logic [$clog2(WIDTH)-1:0] shift_num
   );
 
-  
+///Method-1  // Circular Shift Operation  // 
 
 generate
   if(SHIFT==1) begin:right_shift_rotate // RIght Shift Rotate Operation
@@ -19,4 +19,10 @@ generate
   
 endgenerate
 
+  // Method-2 // Circular Shift Operation //
+  shift_out= {shift_in, shift_in} >> (shift_num+1) ;  // Left Shift Operation
+
+  
+  shift_out= {shift_in, shift_in} << (shift_num+1) ;  // Right Shift Operation
+  
 endmodule 
