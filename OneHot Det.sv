@@ -26,7 +26,12 @@ assign onehot= (count >1 | count==0)? 1'b0:1'b1;
 	//•	Each iteration of this loop unrolls into combinational logic
 
   //The synthesis view is something like: count = din[0] + din[1] + ... + din[DATA_WIDTH-1]
+//count = count + 1 is NOT a combinational loop as long as:
+	//1.	count is fully assigned inside the always_comb block before any read
+	//2.	There is no previous stored value of count involved
+	//3.	It’s part of a combinational unrolled loop
 
+//Your code satisfies all 3 → SAFE.
   /////When their is combinational logic
   ////always_comb begin
   //if (enable)
