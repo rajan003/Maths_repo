@@ -16,6 +16,10 @@ always_comb begin
 end
 assign onehot= (count >1 | count==0)? 1'b0:1'b1;
 
+///Implementation-2// 
+/// To detech of one bit is high >>> Subtract one from the digit that will enable all ones except for 1 hot bit
+	assign onehot =	(din != '0 ) && (din & (din-1) == '0)  ;
+
 ///Here why Count= count+1 is not forming a combo loop
   //1. count is REASSIGNED FROM SCRATCH at the top of the block
   //2.  count= count+1 >>> But this “count” on the RHS is NOT the previous registered value of count.\
