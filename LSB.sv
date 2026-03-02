@@ -1,29 +1,35 @@
 ///Calculating Leftmost Set bit//////////////////
-Approach-1: Right Shift the Number till its greater than 0 (>0) . 
+//Approach-1: Right Shift the Number till its greater than 0 (>0) . 
 module LMB (
-            input logic clk;
   input logic [NUM_PORTS-1:0] in,
-  output logic pos );
+            output logic [$clog2(NUM_PORTS)-1:0] pos );
 
+//Implementation-1///////////
+always_comb begin
+  pos = '0;
+  set = 1'b0;
 
-            logic [NUM_PORTS-1:0] pos_r;
-            always@(posedge clk, posedge rst)
-                 begin 
-                             if(rst) begin 
-                                         x <= '0;
-                                         pos <= '0;
-                                         end
-                             else if(en) x <= in;
-                             else while(x>0)
-                                         begin 
-                                                x<= x >>1;
-                                                pos=pos+1;
-                                         end 
-                 end 
+  for (int i = 0; i < NUM_PORTS; i++) begin
+    if (in[i] && !set) begin
+      pos = i[$clog2(NUM_PORTS)-1:0];
+      set = 1'b1;
+    end
+  end
+end
 
-always_comb
-            if(x==0) pos = pos_r;
+///Implementation-2/////////
+logic [NUM_PORTS-1:0] x_int;
+//// Finding the Leaase significant set bit
+assign x_int =  in & ~(in-1) ;
 
+///finding the position of the bit to binary value            
+logic [$clog2(NUM_PORTS)-1:0] pos;
+always_comb begin
+pos = '0;
+            for(int i = 0; i < NUM_PORTS ; i++)
+                        if(x_int[i] == 1'b1 ) pos = i[$clog2(NUM_PORTS)-1:0] ;
+            end 
+end 
 endmodule 
 
 
