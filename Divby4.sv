@@ -45,3 +45,11 @@ if(!resetn) begin
 
  assign dout= (state==MOD0);
 endmodule
+
+
+/// Implementation-2///
+//If a number last 2 digit are 0 than that number is divisible by 4
+// (x & 3) == 0
+
+always_comb 
+  dout= (x & 3 == 0) ? 1'b1 : 1'b0;
